@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+		<h1>Bitcoin Price Index</h1>
+		<div
+		v-for="currency in info"
+		class="currency"
+		>
+		{{ currency.description }}
+		<span class="ligthen">
+			<span v-html="currency.symbol"></span>{{ currency.rate_float | currencydecimal }}
+		</span>
+	</div>
+	
+    </div>
+
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script src="../node_modules/axios/dist/axios.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+

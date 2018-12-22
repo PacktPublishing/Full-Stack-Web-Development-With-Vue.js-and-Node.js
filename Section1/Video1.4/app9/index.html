@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+		<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+		<style>
+		#app {
+			padding-top: 20px;
+		}
+
+		[v-cloak] { 
+			display: none; 
+		}
+
+		.customBtn {
+			width: 120px;
+		}
+		</style>
+
+	</head>
+	<body>
+
+	<div id="app" v-cloak>
+
+		<b-container>
+			<b-row>
+				<b-col style="float: left;width: 200px;" >
+					<b-card title="Inventory">
+						<b-list-group>
+							<b-list-group-item v-for="stock in inventory" :key="stock.name">
+								<b-container>
+									<b-row>
+										<b-col>{{ stock.name }}</b-col>
+										<b-col class="text-right">{{ stock.price | money}}</b-col>
+									</b-row>
+								</b-container>
+							</b-list-group-item>
+						</b-list-group>
+					</b-card>
+				</b-col>
+				<b-col style="float: right;width: 200px;">
+					<b-card title="Holdings">
+						<b-list-group>
+							<b-list-group-item v-for="stock in inventory" :key="stock.name">
+								<b-container>
+									<b-row>
+										<b-col>{{ stock.name }}</b-col>
+										<b-col class="text-right">{{ stock.held}}</b-col>
+									</b-row>
+								</b-container>
+							</b-list-group-item>
+						</b-list-group>
+						<p class="card-text">
+							Holdings: {{ holdingValue | money }}
+						</p>
+					</b-card>
+				</b-col>
+			</b-row>
+			
+			<div style="height:20px">
+			<b-card title="Purchase and Sell Inventory">
+			
+				<p class="card-text">
+					Buy <b-form-input v-model.number="buy" type="number" style="width:100px;display:inline"></b-form-input> shares of 
+					<b-form-select style="width:120px;display:inline" v-model="buyStock">
+						<option v-for="stock in inventory" :key="stock.name">{{ stock.name }}</option>
+					</b-form-select>
+					<b-button :variant="'success'" @click="buyStocks" class="customBtn">Purchase</b-button>
+					<span v-if="buyError">Not enough cash.</span>
+				</p>
+				<p class="card-text">
+					Sell <b-form-input v-model.number="sell" type="number" style="width:100px;display:inline"></b-form-input> shares of 
+					<b-form-select style="width:120px;display:inline" v-model="sellStock">
+						<option v-for="stock in inventory" :key="stock.name">{{ stock.name }}</option>
+					</b-form-select>
+					<b-button :variant="'success'" @click="sellStocks" class="customBtn">Sell</b-button>
+					<span v-if="sellError">Not enough on hand.</span>
+				</p>
+
+				<p class="card-text">
+					CASH {{ cash | money }}.
+				</p>
+
+			</b-card>
+
+		</b-container>
+
+	</div>
+	
+	<script src="https://unpkg.com/vue"></script>
+	<script src="https://unpkg.com/vuex"></script>
+	<script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+	<script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+	<script src="script.js"></script>
+	</body>
+</html>
