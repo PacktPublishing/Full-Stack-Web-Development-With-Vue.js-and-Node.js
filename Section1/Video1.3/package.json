@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "jshint": "^2.9.6",
     "vue": "^2.5.17",
     "vue-router": "^3.0.2",
